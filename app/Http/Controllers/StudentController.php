@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Distict;
 use App\Models\Division;
 use App\Models\Student;
+use App\Models\Upzilla;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -27,7 +29,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'division_id' => 'required',
+            'distict_id ' => 'required',
+            'upzilla_id' => 'required',
+        ]);
+
+        Student::create([
+            'name' => $request->name,
+            'division_id' => $request->division_id,
+            'distict_id' => $request->distict_id,
+            'upzilla_id' => $request->upzilla_id,
+        ]);
+
+        return redirect()->route('index');
     }
 
     /**
@@ -38,7 +54,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        $divisions = Division::all();
+        return view('action.edit', compact('student','divisions'));
     }
 
     /**
@@ -62,5 +79,15 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+    public function getDistict($id)
+    {
+        $disticts = Distict::where('division_id', $id)->get();
+        return response()->json($disticts);
+    }
+    public function getUpzilla($id)
+    {
+        $upzillas = Upzilla::where('distict_id', $id)->get();
+        return response()->json($upzillas);
     }
 }

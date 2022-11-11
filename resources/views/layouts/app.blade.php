@@ -31,8 +31,10 @@
     <div class="container pt-3">
         @yield('content')
     </div>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/all.min.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>
