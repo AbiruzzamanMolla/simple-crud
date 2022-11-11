@@ -20,13 +20,17 @@
                 <td>{{ $student->distict->name }}</td>
                 <td>{{ $student->upzilla->name }}</td>
                 <td class="text-center">
-                  <div class="btn-group" role="group">
-                    <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning"><i
-                      class="fa-solid fa-pen-to-square"></i></a>
-                    <button type="button" class="btn btn-danger"><i
-                      class="fa-solid fa-trash"></i></button>
-                  </div>
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('students.edit', $student->id) }}"
+                            class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $student->id }}').submit();"><i class="fa-solid fa-trash"></i></button>
+                    </div>
                 </td>
+                <form id="delete-form-{{$student->id}}"
+                    + action="{{route('students.destroy', $student->id)}}"
+                    method="post">
+                  @csrf @method('DELETE')
+              </form>
             </tr>
         @empty
             <tr>
