@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="row pt-4">
-                        <div class="col-md-3 offset-5"><button>Create</button></div>
+                        <div class="col-md-3 offset-5"><button class="btn btn-success">Create</button></div>
                     </div>
                 </form>
             </div>
