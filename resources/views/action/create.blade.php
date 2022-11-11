@@ -31,7 +31,7 @@
                                     name="division_id" aria-label="Division" id="divison">
                                     <option value="">Select Division</option>
                                     @foreach($divisions as $division)
-                                        <option value="{{ $division->id }}">{{ $division->name }}</option>
+                                        <option value="{{ $division->id }}" @selected(old('division_id') == $division->id)>{{ $division->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('division_id')
