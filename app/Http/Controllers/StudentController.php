@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Division;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $divisions = Division::all();
+        return view('action.create', compact('divisions'));
     }
 
     /**

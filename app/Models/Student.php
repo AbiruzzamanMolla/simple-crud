@@ -15,4 +15,14 @@ class Student extends Model
         'distict_id',
         'upzilla_id',
     ];
+
+    public function division(){
+        return $this->belongsTo(Division::class);
+    }
+    public function distict(){
+        return $this->belongsTo(Distict::class);
+    }
+    public function upzilla(){
+        return $this->belongsTo(Upzilla::class);
+    }
 }
