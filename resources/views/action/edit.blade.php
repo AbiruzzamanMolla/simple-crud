@@ -9,6 +9,7 @@
             <div class="card-body">
                 <form action="{{ route('students.update', $student->id) }}" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-6 offset-3">
                             <div class="form-group">
@@ -48,6 +49,9 @@
                                 <label for="distict_id" class="pb-1">Distict</label>
                                 <select class="form-select @error('distict_id') is-invalid @enderror" aria-label="Distict" name="distict_id" id="distict_id">
                                     <option value="">Select Distict</option>
+                                    @foreach($disticts as $distict)
+                                    <option value="{{ $distict->id }}" {{ $distict->id == $student->distict_id ? 'selected' : '' }}>{{ $distict->name }}</option>
+                                @endforeach
                                 </select>
                                 @error('distict_id')
                                 <div class="invalid-feedback d-block" role="alert">
@@ -64,6 +68,9 @@
                                 <select class="form-select @error('upzilla_id') is-invalid @enderror"
                                     aria-label="Upzilla" name="upzilla_id" id="upzilla_id">
                                     <option value="">Select Upzilla</option>
+                                    @foreach($upzillas as $upzilla)
+                                    <option value="{{ $upzilla->id }}" {{ $upzilla->id == $student->upzilla_id ? 'selected' : '' }}>{{ $upzilla->name }}</option>
+                                @endforeach
                                 </select>
                                 @error('upzilla_id')
                                     <div class="invalid-feedback d-block" role="alert">

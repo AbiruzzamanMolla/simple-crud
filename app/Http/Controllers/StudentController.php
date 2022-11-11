@@ -32,15 +32,15 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required',
             'division_id' => 'required',
-            'distict_id ' => 'required',
+            'distict_id' => 'required',
             'upzilla_id' => 'required',
         ]);
 
         Student::create([
             'name' => $request->name,
-            'division_id' => $request->division_id,
-            'distict_id' => $request->distict_id,
             'upzilla_id' => $request->upzilla_id,
+            'distict_id' => $request->distict_id,
+            'division_id' => $request->division_id,
         ]);
 
         return redirect()->route('index');
@@ -55,7 +55,9 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $divisions = Division::all();
-        return view('action.edit', compact('student','divisions'));
+        $disticts = Distict::where('division_id', $student->division_id)->get();
+        $upzillas = Upzilla::where('distict_id', $student->distict_id)->get();
+        return view('action.edit', compact('student', 'divisions', 'disticts', 'upzillas'));
     }
 
     /**
@@ -67,7 +69,23 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        // return $request;
+
+        $request->validate([
+            'name' => 'required',
+            'division_id' => 'required',
+            'distict_id' => 'required',
+            'upzilla_id' => 'required',
+        ]);
+
+        $student->update([
+            'name' => $request->name,
+            'upzilla_id' => $request->upzilla_id,
+            'distict_id' => $request->distict_id,
+            'division_id' => $request->division_id,
+        ]);
+
+        return back();
     }
 
     /**
@@ -78,7 +96,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return back();
     }
     public function getDistict($id)
     {
