@@ -32,7 +32,7 @@
                                     name="division_id" aria-label="Division" id="divison">
                                     <option value="">Select Division</option>
                                     @foreach($divisions as $division)
-                                        <option value="{{ $division->id }}" {{ old('division_id', $division->id) == $student->division_id ? 'selected' : '' }}>{{ $division->name }}</option>
+                                        <option value="{{ $division->id }}" @selected(old('division_id') == $division->id)>{{ $division->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('division_id')
@@ -50,7 +50,7 @@
                                 <select class="form-select @error('distict_id') is-invalid @enderror" aria-label="Distict" name="distict_id" id="distict_id">
                                     <option value="">Select Distict</option>
                                     @foreach($disticts as $distict)
-                                    <option value="{{ $distict->id }}" {{ old('distict_id', $distict->id) == $student->distict_id ? 'selected' : '' }}>{{ $distict->name }}</option>
+                                    <option value="{{ $distict->id }}" @selected(old('distict_id') == $distict->id)>{{ $distict->name }}</option>
                                 @endforeach
                                 </select>
                                 @error('distict_id')
@@ -69,7 +69,7 @@
                                     aria-label="Upzilla" name="upzilla_id" id="upzilla_id">
                                     <option value="">Select Upzilla</option>
                                     @foreach($upzillas as $upzilla)
-                                    <option value="{{ $upzilla->id }}" {{ old('upzilla_id', $upzilla->id) == $student->upzilla_id ? 'selected' : '' }}>{{ $upzilla->name }}</option>
+                                    <option value="{{ $upzilla->id }}" @selected(old('upzilla_id') == $upzilla->id)>{{ $upzilla->name }}</option>
                                 @endforeach
                                 </select>
                                 @error('upzilla_id')
