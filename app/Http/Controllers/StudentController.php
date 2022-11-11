@@ -42,7 +42,7 @@ class StudentController extends Controller
             'distict_id' => $request->distict_id,
             'division_id' => $request->division_id,
         ]);
-
+        session()->flash('success', 'Student Created!');
         return redirect()->route('index');
     }
 
@@ -84,7 +84,7 @@ class StudentController extends Controller
             'distict_id' => $request->distict_id,
             'division_id' => $request->division_id,
         ]);
-
+        session()->flash('success', 'Student Updated!');
         return back();
     }
 
@@ -96,8 +96,13 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        $student->delete();
-        return back();
+        $data = $student->delete();
+        if($data) session()->flash('success', 'Student Deleted!');
+        $msg = $data ? 'Student deleted successfully' : 'Student Deleting Failed!';
+        return response()->json([
+            'message' => $msg,
+            'success' => $data
+        ]);
     }
     public function getDistict($id)
     {

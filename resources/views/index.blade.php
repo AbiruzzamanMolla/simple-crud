@@ -23,7 +23,12 @@
                     <div class="btn-group" role="group">
                         <a href="{{ route('students.edit', $student->id) }}"
                             class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $student->id }}').submit();"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn btn-danger deleteButton" data-toggle="tooltip"
+                            data-placement="top" title="" data-original-title="Delete"
+                            data-url="{{ route('students.destroy', $student->id) }}"
+                            data-token="{{ csrf_token() }}">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </div>
                 </td>
                 <form id="delete-form-{{$student->id}}"
@@ -39,4 +44,50 @@
         @endforelse
     </tbody>
 </table>
+{{ $students->links() }}
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(".deleteButton").click(function (e) {
+        e.preventDefault();
+        var URL = $(this).data('url');
+        var token = $(this).data('token');
+        deleteConfirmation(URL, token);
+    });
+    function deleteConfirmation(URL, token) {
+        swal({
+            title: "Delete?",
+            text: "Please ensure and then confirm!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: !0
+        }).then(function (e) {
+            if (e.value === true) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: URL,
+                    data: {
+                        _token: token
+                    },
+                    dataType: 'JSON',
+                    success: function (results) {
+                        if (results.success === true) {
+                            swal("Done!", results.message, "success");
+                            location.reload();
+                        } else {
+                            swal("Error!", results.message, "error");
+                        }
+                    }
+                });
+            } else {
+                e.dismiss;
+            }
+        }, function (dismiss) {
+            return false;
+        })
+    }
+</script>
 @endsection
