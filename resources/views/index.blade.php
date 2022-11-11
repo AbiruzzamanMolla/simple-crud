@@ -31,20 +31,17 @@
                         </button>
                     </div>
                 </td>
-                <form id="delete-form-{{$student->id}}"
-                    + action="{{route('students.destroy', $student->id)}}"
-                    method="post">
-                  @csrf @method('DELETE')
-              </form>
             </tr>
         @empty
             <tr>
-                <td colspan="4">No Data Found...</td>
+                <td colspan="6" class="text-center">No Data Found...</td>
             </tr>
         @endforelse
     </tbody>
 </table>
-{{ $students->links() }}
+<div class="d-flex justify-content-center">
+    {!! $students->links() !!}
+</div>
 @endsection
 
 @section('script')
