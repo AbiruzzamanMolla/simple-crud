@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Distict;
+use App\Models\Upzilla;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DistictSeeder extends Seeder
+class UpzillaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,15 +17,15 @@ class DistictSeeder extends Seeder
     public function run()
     {
         $ups = [
-            'Dhaka',
-            'Faridpur',
-            'Gazipur',
-            'Gopalganj',
+            'Shibpur',
+            'Narshingdi Sadar',
+            'Belabo',
+            'Raipura',
             'Jamalpur',
         ];
 
         foreach ($ups as $upzilla) {
-            Distict::create([
+            Upzilla::create([
                 'name' => $upzilla,
                 'distict_id' => 1
             ]);

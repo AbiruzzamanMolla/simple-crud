@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             DivisionSeeder::class,
-            DistictSeeder::class
+            DistictSeeder::class,
+            UpzillaSeeder::class,
+            StudentSeeder::class
         ]);
     }
 }
