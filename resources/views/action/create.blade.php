@@ -87,19 +87,21 @@
                 // get distict data
                 $('select[name="division_id"]').on('change', function (e) {
                     var divID = $(this).val();
-                    console.log(divID);
+                    var field = $('select[name="distict_id"]');
                     if (divID) {
                         $.ajax({
                             url: '/ajax/distict/' + divID,
                             type: "GET",
                             dataType: "json",
                             success: function (data) {
-                                console.log(data);
-                                $('select[name="distict_id"]').empty();
-                                $('select[name="distict_id"]').append(
+                                field.empty();
+                                $('select[name="upzilla_id"]').empty();
+                                $('select[name="upzilla_id"]').append(
+                                    '<option value="">Select Upzilla</option>');
+                                field.append(
                                     '<option value="">Select Distict</option>');
                                 $.each(data, function (key, value) {
-                                    $('select[name="distict_id"]').append(
+                                    field.append(
                                         '<option value=" ' + value.id + '">' +
                                         value.name + '</option>');
                                 });
@@ -111,19 +113,18 @@
                 // get upzilla data
                 $('select[name="distict_id"]').on('change', function (e) {
                     var disID = $(this).val();
-                    console.log(disID);
+                    var field = $('select[name="upzilla_id"]');
                     if (disID) {
                         $.ajax({
                             url: '/ajax/upzilla/' + disID,
                             type: "GET",
                             dataType: "json",
                             success: function (data) {
-                                console.log(data);
-                                $('select[name="upzilla_id"]').empty();
-                                $('select[name="upzilla_id"]').append(
+                                field.empty();
+                                field.append(
                                     '<option value="">Select Upzilla</option>');
                                 $.each(data, function (key, value) {
-                                    $('select[name="upzilla_id"]').append(
+                                    field.append(
                                         '<option value=" ' + value.id + '">' +
                                         value.name + '</option>');
                                 });

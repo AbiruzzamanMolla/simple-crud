@@ -94,14 +94,15 @@
                 // get distict data
                 $('select[name="division_id"]').on('change', function (e) {
                     var divID = $(this).val();
-                    console.log(divID);
                     if (divID) {
                         $.ajax({
                             url: '/ajax/distict/' + divID,
                             type: "GET",
                             dataType: "json",
                             success: function (data) {
-                                console.log(data);
+                                $('select[name="upzilla_id"]').empty();
+                                $('select[name="upzilla_id"]').append(
+                                    '<option value="">Select Upzilla</option>');
                                 $('select[name="distict_id"]').empty();
                                 $('select[name="distict_id"]').append(
                                     '<option value="">Select Distict</option>');
@@ -118,14 +119,12 @@
                 // get upzilla data
                 $('select[name="distict_id"]').on('change', function (e) {
                     var disID = $(this).val();
-                    console.log(disID);
                     if (disID) {
                         $.ajax({
                             url: '/ajax/upzilla/' + disID,
                             type: "GET",
                             dataType: "json",
                             success: function (data) {
-                                console.log(data);
                                 $('select[name="upzilla_id"]').empty();
                                 $('select[name="upzilla_id"]').append(
                                     '<option value="">Select Upzilla</option>');
