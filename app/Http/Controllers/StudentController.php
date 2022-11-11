@@ -104,14 +104,4 @@ class StudentController extends Controller
             'success' => $data
         ]);
     }
-    public function getDistict($id)
-    {
-        $disticts = Distict::where('division_id', $id)->get();
-        return response()->json($disticts);
-    }
-    public function getUpzilla($id)
-    {
-        $upzillas = Upzilla::where('distict_id', $id)->get();
-        return response()->json($upzillas);
-    }
 }

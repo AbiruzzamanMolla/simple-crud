@@ -1,17 +1,13 @@
 <?php
 
 use App\Http\Controllers\StudentController;
-use App\Models\Student;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    $students = Student::with('division', 'distict', 'upzilla')->latest()->paginate(10);
-    return view('index', ['students' => $students]);
-})->name('index');
 
 Route::resource('students', StudentController::class)->except([
     'index', 'show'
 ]);
 
-Route::get('/ajax/distict/{id}', [StudentController::class, 'getDistict']);
-Route::get('/ajax/upzilla/{id}', [StudentController::class, 'getUpzilla']);
+Route::get('/', [WebsiteController::class, 'index'])->name('index');
+Route::get('/ajax/distict/{id}', [WebsiteController::class, 'getDistict']);
+Route::get('/ajax/upzilla/{id}', [WebsiteController::class, 'getUpzilla']);
