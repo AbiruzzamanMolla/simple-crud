@@ -89,7 +89,6 @@
         @endsection
         @section('script')
         <script>
-            console.log('Hello Test');
             $(document).ready(function () {
                 // get distict data
                 $('select[name="division_id"]').on('change', function (e) {

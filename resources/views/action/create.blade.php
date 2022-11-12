@@ -82,11 +82,23 @@
         @endsection
         @section('script')
         <script>
-            console.log('Hello Test');
             $(document).ready(function () {
+                var oldDivi = {{ old('division_id') ? old('division_id') : 0 }};
+                var oldDist = {{ old('distict_id') ? old('distict_id') : 0 }};
+                if(oldDivi){
+                    getDistict(oldDivi);
+                }
+                if(oldDist){
+                    getUpzilla(oldDist);
+                }
                 // get distict data
                 $('select[name="division_id"]').on('change', function (e) {
                     var divID = $(this).val();
+                    getDistict(divID);
+                });
+                // function getDistict
+                function getDistict(divID){
+                    var oldDist = {{ old('distict_id') ? old('distict_id') : 0 }};
                     var field = $('select[name="distict_id"]');
                     if (divID) {
                         $.ajax({
@@ -101,18 +113,25 @@
                                 field.append(
                                     '<option value="">Select Distict</option>');
                                 $.each(data, function (key, value) {
+                                    var selectedName = value.id == oldDist ? "selected" : "";
                                     field.append(
-                                        '<option value=" ' + value.id + '">' +
+                                        '<option value="' + value.id + '"'+ selectedName +'>' +
                                         value.name + '</option>');
                                 });
                             }
 
                         })
                     }
-                });
+                }
                 // get upzilla data
                 $('select[name="distict_id"]').on('change', function (e) {
                     var disID = $(this).val();
+                    getUpzilla(disID);
+                });
+
+                // function upzilla
+                function getUpzilla(disID){
+                    var oldUpz = {{ old('upzilla_id') ? old('upzilla_id') : 0 }};
                     var field = $('select[name="upzilla_id"]');
                     if (disID) {
                         $.ajax({
@@ -124,15 +143,16 @@
                                 field.append(
                                     '<option value="">Select Upzilla</option>');
                                 $.each(data, function (key, value) {
+                                    var selectedName = value.id == oldUpz ? "selected" : "";
                                     field.append(
-                                        '<option value=" ' + value.id + '">' +
+                                        '<option value=" ' + value.id + '"'+ selectedName +'>' +
                                         value.name + '</option>');
                                 });
                             }
 
                         })
                     }
-                });
+                }
             });
 
         </script>
