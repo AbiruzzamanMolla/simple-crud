@@ -126,6 +126,8 @@
                 // get upzilla data
                 $('select[name="distict_id"]').on('change', function (e) {
                     var disID = $(this).val();
+                    $('select[name="upzilla_id"]').empty();
+                    $('select[name="upzilla_id"]').append('<option value="">Select Upzilla</option>');
                     getUpzilla(disID);
                 });
 
